@@ -166,45 +166,7 @@ threading.Thread(target=run_client).start()
 '''
 ## Output:
 
-'''
-=================================
- SERVER IS ONLINE 
- Waiting for client...
-=================================
-
-[CLIENT CONNECTED TO SERVER]
-
-[NEW CONNECTION] ('127.0.0.1', 61685)
-[CLIENT] >> Hello Server
-
-
-[CLIENT SENT] : Hello Server
-[SERVER REPLY] : Hello Client! Welcome.
-[SERVER] >> Hello Client! Welcome.
-
-[CLIENT] >> How are you?
-
-[CLIENT SENT] : How are you?
-[SERVER REPLY] : I am running perfectly.
-[SERVER] >> I am running perfectly.
-
-[CLIENT] >> What are you doing?
-
-[CLIENT SENT] : What are you doing?
-[SERVER REPLY] : I am processing your messages.
-[SERVER] >> I am processing your messages.
-
-[CLIENT] >> Bye
-
-[CLIENT SENT] : Bye
-[SERVER REPLY] : Goodbye Client!
-
-[SERVER CLOSED][SERVER] >> Goodbye Client!
-
-
-[CLIENT DISCONNECTED]
-'''
-
+<img width="470" height="808" alt="Screenshot 2026-05-13 153233" src="https://github.com/user-attachments/assets/25d5b467-d6d6-471b-b486-8e4936d8a26a" />
 
 ## Result:
 
