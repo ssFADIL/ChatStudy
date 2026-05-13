@@ -165,6 +165,7 @@ threading.Thread(target=run_server).start()
 threading.Thread(target=run_client).start()
 '''
 ## Output:
+
 '''
 =================================
  SERVER IS ONLINE 
@@ -203,6 +204,7 @@ threading.Thread(target=run_client).start()
 
 [CLIENT DISCONNECTED]
 '''
+
 
 ## Result:
 
