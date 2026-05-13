@@ -72,7 +72,137 @@ User authentication mechanisms are essential to ensure secure and authorized acc
 Client-server chat applications are versatile tools that facilitate real-time communication between users over a network. They incorporate various components, including server-side and client-side elements, and must consider factors such as security, scalability, and concurrency. As technology continues to advance, client-server chat applications remain integral for collaborative communication in various domains.
 
 Client-server chat applications are foundational to real-time communication over networks. They incorporate principles of socket programming, communication protocols, and security mechanisms to provide a seamless user experience. Understanding the basics of client-server chat applications is essential for developers involved in networked application development, as they form the backbone of various collaborative communication systems. As technology evolves, chat applications continue to adapt, incorporating new features and technologies to enhance user interaction and connectivity.
+## Program:
+'''
+import socket
+import threading
+import time
 
+HOST = "127.0.0.1"
+PORT = 9090
+
+
+# ---------------- SERVER ----------------
+def run_server():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((HOST, PORT))
+    server.listen(1)
+
+    print("=================================")
+    print(" SERVER IS ONLINE ")
+    print(" Waiting for client...")
+    print("=================================")
+
+    conn, addr = server.accept()
+
+    print(f"\n[NEW CONNECTION] {addr}")
+
+    while True:
+        msg = conn.recv(1024).decode()
+
+        if not msg:
+            break
+
+        print(f"\n[CLIENT SENT] : {msg}")
+
+        # Different automatic replies
+        if msg.lower() == "hello server":
+            reply = "Hello Client! Welcome."
+        elif msg.lower() == "how are you?":
+            reply = "I am running perfectly."
+        elif msg.lower() == "what are you doing?":
+            reply = "I am processing your messages."
+        elif msg.lower() == "bye":
+            reply = "Goodbye Client!"
+        else:
+            reply = "Unknown message received."
+
+        print(f"[SERVER REPLY] : {reply}")
+
+        conn.send(reply.encode())
+
+        if msg.lower() == "bye":
+            break
+
+    print("\n[SERVER CLOSED]")
+    conn.close()
+    server.close()
+
+
+# ---------------- CLIENT ----------------
+def run_client():
+    time.sleep(1)
+
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((HOST, PORT))
+
+    print("\n[CLIENT CONNECTED TO SERVER]")
+
+    messages = [
+        "Hello Server",
+        "How are you?",
+        "What are you doing?",
+        "Bye"
+    ]
+
+    for msg in messages:
+        print(f"\n[CLIENT] >> {msg}")
+
+        client.send(msg.encode())
+
+        reply = client.recv(1024).decode()
+
+        print(f"[SERVER] >> {reply}")
+
+        time.sleep(1)
+
+    print("\n[CLIENT DISCONNECTED]")
+    client.close()
+
+
+# ---------------- MAIN ----------------
+threading.Thread(target=run_server).start()
+threading.Thread(target=run_client).start()
+'''
+## Output:
+'''
+=================================
+ SERVER IS ONLINE 
+ Waiting for client...
+=================================
+
+[CLIENT CONNECTED TO SERVER]
+
+[NEW CONNECTION] ('127.0.0.1', 61685)
+[CLIENT] >> Hello Server
+
+
+[CLIENT SENT] : Hello Server
+[SERVER REPLY] : Hello Client! Welcome.
+[SERVER] >> Hello Client! Welcome.
+
+[CLIENT] >> How are you?
+
+[CLIENT SENT] : How are you?
+[SERVER REPLY] : I am running perfectly.
+[SERVER] >> I am running perfectly.
+
+[CLIENT] >> What are you doing?
+
+[CLIENT SENT] : What are you doing?
+[SERVER REPLY] : I am processing your messages.
+[SERVER] >> I am processing your messages.
+
+[CLIENT] >> Bye
+
+[CLIENT SENT] : Bye
+[SERVER REPLY] : Goodbye Client!
+
+[SERVER CLOSED][SERVER] >> Goodbye Client!
+
+
+[CLIENT DISCONNECTED]
+'''
 
 ## Result:
 
